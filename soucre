@@ -1,0 +1,81 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local Keyget = Instance.new("TextButton")
+local enter = Instance.new("TextButton")
+local TextBox = Instance.new("TextBox")
+
+--Properties:
+
+ScreenGui.Parent = game.Workspace
+
+main.Name = 'main'
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+main.Position = UDim2.new(0.509259284, 0, 0.385826766, 0)
+main.Size = UDim2.new(0, 227, 0, 192)
+main.Draggable = true
+
+title.Name = "title "
+title.Parent = Main
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BorderColor3 = Color3.fromRGB(255, 255, 255)
+title.Size = UDim2.new(0, 227, 0, 50)
+title.Font = Enum.Font.Jura
+title.Text = "Dove Key System "
+title.TextColor3 = Color3.fromRGB(0, 0, 0)
+title.TextScaled = true
+title.TextSize = 14.000
+title.TextWrapped = true
+
+Keyget.Name = "Keyget"
+Keyget.Parent = Main
+Keyget.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Keyget.Position = UDim2.new(0.0572687238, 0, 0.807291687, 0)
+Keyget.Size = UDim2.new(0, 99, 0, 20)
+Keyget.Font = Enum.Font.Jura
+Keyget.Text = "Get Key "
+Keyget.TextColor3 = Color3.fromRGB(0, 0, 0)
+Keyget.TextSize = 14.000
+
+enter.Name = "enter "
+enter.Parent = Main
+enter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+enter.Position = UDim2.new(0.537444949, 0, 0.807291627, 0)
+enter.Size = UDim2.new(0, 99, 0, 20)
+enter.Font = Enum.Font.Jura
+enter.Text = "Submit "
+enter.TextColor3 = Color3.fromRGB(0, 0, 0)
+enter.TextSize = 14.000
+enter.MouseButton1Down:connect(function()
+	local key = keyhere.Text
+	local userid = game:GetService('Players').LocalPlayer.UserId
+	local url = "http://dovex.000webhostapp.com/index.php?key="..key.."&user="..userid
+
+	if game:HttpGet(url) == "~ True ~" then
+		enter.Text = "Whitelisted"
+		wait(1)
+
+		loadstring(game:HttpGet('https://dovex.000webhostapp.com/script.lua'))()
+		Login.Visible = false
+	else
+		game.Players.LocalPlayer:Kick("invaild key please retry the linkvertise")
+		enter.Text = " ~ Not Whitelisted ~"
+		wait(1)
+		Login.Visible = false
+	end
+end)
+TextBox.Parent = Main
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.Position = UDim2.new(0.0572687238, 0, 0.369791657, 0)
+TextBox.Size = UDim2.new(0, 200, 0, 50)
+TextBox.Font = Enum.Font.Jura
+TextBox.Text = "enter your key here"
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 14.000
+print ("worked")
